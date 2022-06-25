@@ -7,9 +7,14 @@ use App\Models\Card;
 
 class CardSearch extends Controller
 {
-    public function card_search()
+    public function card_search(Request $request)
+    {
+        $cards = Card::where('card_name','like',"%$request->search_card%")->get();
+        return view('card_search', compact('cards'));
+    }
+    public function search_post()
     {
         $cards = Card::first();
-        return view('card_search', compact('cards'));
+        return view('search');
     }
 }
