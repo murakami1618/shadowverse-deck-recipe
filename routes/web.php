@@ -20,5 +20,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/card/search', [CardSearch::class, 'card_search'])->name('card/search');
 Route::post('/card/search', [CardSearch::class, 'card_search'])->name('card/search');
 Route::get('/search', [CardSearch::class, 'search_post']);

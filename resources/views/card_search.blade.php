@@ -1,13 +1,12 @@
-@extends('layouts.app')
+@extends('search')
 
-@section('content')
+@section('card')
+<div class='container  flex-nowrap'>
+<div class="row justify-content-md-center">
 @foreach($cards as $card)
-    <img src='{{$card->card_img_url}}' class='w-25'><br>
-    <a>{{$card->card_rea}}</a>
-    <a>{{$card->cost}}コスト:</a>
-    <a>{{$card->card_type}}</a>
-    <br>
-    <a>{{$card->card_name}}</a>
-    <br>
+        <img src='{{$card->card_img_url}}' class='p-1' style="width: 200px;">
 @endforeach
+{{ $cards->appends(request()->input())->links()}}
+</div>
+</div>
 @endsection

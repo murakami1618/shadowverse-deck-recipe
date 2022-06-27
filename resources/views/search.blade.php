@@ -5,5 +5,7 @@
 @csrf
     <input type='text' name='search_card' placeholder='カード名を入力'>
     <input type='submit'>
-</fomr>
+</form>
+@yield('card')
+
 @endsection
