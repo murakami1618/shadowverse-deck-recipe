@@ -9,8 +9,9 @@ class CardSearch extends Controller
 {
     public function card_search(Request $request)
     {
-        $cards = Card::where('card_name','like',"%$request->search_card%")->orderByRaw('cast(cost as signed) asc')->paginate(12);
-        return view('card_search', compact('cards'));
+        $cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ドラゴン']])->orderByRaw('cast(cost as signed) asc')->paginate(20);
+        $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])->orderByRaw('cast(cost as signed) asc')->paginate(20);
+        return view('card_search', compact('cards','neutral_cards'));
     }
     public function search_post()
     {
