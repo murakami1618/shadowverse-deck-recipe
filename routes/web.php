@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CardSearch;
+use App\Http\Controllers\MainController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +14,9 @@ use App\Http\Controllers\CardSearch;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Auth::routes();
 
@@ -23,3 +24,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/card/search', [CardSearch::class, 'card_search'])->name('card/search');
 Route::post('/card/search', [CardSearch::class, 'card_search'])->name('card/search');
 Route::get('/search', [CardSearch::class, 'search_post']);
+Route::get('/', [MainController::class, 'get_decks'])->name('/');
