@@ -24,7 +24,7 @@
           @foreach($cards as $card)
             <form action="{{ route('post') }}" method='post'>
               @csrf
-              <input type='hidden' name='card' value='{{$card->card_name}}'>
+              <input type='hidden' name='cardid' value='{{$card->id}}'>
               <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
             </form>
             <?php $i++; ?>
@@ -52,7 +52,7 @@
         @foreach($neutral_cards as $card)
               <form action="{{ route('post') }}" method='post'>
                 @csrf
-                <input type='hidden' name='card' value='{{$card->card_name}}'>
+                <input type='hidden' name='cardid' value='{{$card->id}}'>
                 <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
               </form>
               <?php $i++; ?>

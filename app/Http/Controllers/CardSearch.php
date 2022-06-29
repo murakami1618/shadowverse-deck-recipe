@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Card;
+use App\Models\Deck_card;
 
 class CardSearch extends Controller
 {
@@ -21,6 +22,16 @@ class CardSearch extends Controller
     
     public function post(Request $request)
     {
-        dd($request->card);
-    }　
+        $deckid=1;
+        // echo $request->cardid;
+        // echo $deckid;
+        // $db=Deck_card::get();
+        // foreach($db as $data){
+        //     echo $data->card_id; 
+        // }
+        $deck_card = new Deck_card();
+        $deck_card->deck_id = $deckid;
+        $deck_card->card_id = $request->cardid;
+        $deck_card->save();
+    }
 }
