@@ -19,9 +19,21 @@
           <input type='text' name='search_card' placeholder='カード名を入力'>
           <input type='submit'>
         </form>
-        @foreach($cards as $card)
-          <img src='{{$card->card_img_url}}' class='p-1' style="width: 10%;">
-        @endforeach
+        <?php $i=0; ?>
+        <div style="display:inline-flex" >
+          @foreach($cards as $card)
+            <form action="{{ route('post') }}" method='post'>
+              @csrf
+              <input type='hidden' name='card' value='{{$card->card_name}}'>
+              <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
+            </form>
+            <?php $i++; ?>
+            @if( $i == 10)
+              </div><div style="display:inline-flex" >
+            @endif
+          @endforeach
+        </div>
+
         <div class="d-flex justify-content-center">
             {{ $cards->appends(request()->input())->links()}}
         </div>
@@ -35,9 +47,20 @@
         <input type='text' name='search_card' placeholder='カード名を入力'>
         <input type='submit'>
       </form>
-      @foreach($neutral_cards as $card)
-        <img src='{{$card->card_img_url}}' class='p-1' style="width: 10%;">
-      @endforeach
+      <?php $i=0; ?>
+      <div style="display:inline-flex" >
+        @foreach($neutral_cards as $card)
+              <form action="{{ route('post') }}" method='post'>
+                @csrf
+                <input type='hidden' name='card' value='{{$card->card_name}}'>
+                <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
+              </form>
+              <?php $i++; ?>
+              @if( $i == 10)
+                </div><div style="display:inline-flex" >
+              @endif
+            @endforeach
+        </div>
       <div class="d-flex justify-content-center">
         {{ $cards->appends(request()->input())->links()}}
       </div>

@@ -18,4 +18,9 @@ class CardSearch extends Controller
         $cards = Card::first();
         return view('search');
     }
+    
+    public function post(Request $request)
+    {
+        dd($request->card);
+    }　
 }
