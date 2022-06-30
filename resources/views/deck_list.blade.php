@@ -2,7 +2,7 @@
 @section('content')
 
 @foreach($decks as $deck)
-<form action="{{ route('/test') }}" method="post">
+<form action="{{ route('deck') }}" method="post">
 @csrf
         <input type="image" src="{{ $deck->leader_card }}">
         <input type="hidden" name="deck_id" value="{{ $deck->id }}">

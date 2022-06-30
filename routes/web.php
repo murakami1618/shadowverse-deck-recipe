@@ -27,3 +27,4 @@ Route::get('/search', [CardSearch::class, 'search_post'])->name('search');
 Route::get('/', [MainController::class, 'get_decks'])->name('/');
 Route::post('/post', [CardSearch::class, 'post'])->name('post');
 Route::get('/post', [CardSearch::class, 'post'])->name('post');
+Route::post('/deck', [MainController::class, 'get_cards'])->name('deck');

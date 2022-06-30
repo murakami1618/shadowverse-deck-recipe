@@ -35,7 +35,7 @@ class MainController extends Controller
                 }
                 array_push($hairetu_card,$card);
             }
-        return view('test',compact('hairetu_card'));
+        return view('search',compact('hairetu_card'));
     }
 
 }

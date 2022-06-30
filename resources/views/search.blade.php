@@ -11,7 +11,7 @@
       <div class="justify-content-center card-body row">
         <?php $i=0; ?>
         <div style="display:inline-flex" >
-          @foreach($make_dec_card as $card)
+          @foreach($hairetu_card as $card)
             <form action="{{ route('post') }}" method='post'>
               @csrf
               <input type='hidden' name='cardid' value='{{$card->id}}'>

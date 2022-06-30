@@ -22,9 +22,7 @@ class CardSearch extends Controller
     
     public function post(Request $request)
     {
-        $deckid=1;
-        // echo $request->cardid;
-        // echo $deckid;
+        $deckid=2;
 
         $deck_card = new Deck_card();
         $deck_card->deck_id = $deckid;
@@ -32,17 +30,17 @@ class CardSearch extends Controller
         $deck_card->save();
 
 
-        $deck_cards=Deck_card::get();
-        $make_dec_card = array();
-        foreach($deck_cards as $card){
-            $cards_info=Card::where('id','=',$card->card_id)->orderByRaw('cast(cost as signed) asc')->paginate(20);
-            foreach($cards_info as $card_info){
-                //echo $card_info->card_name;
-            array_push($make_dec_card,$card_info);
-            }
-        }
+        // $deck_cards=Deck_card::get();
+        // $make_dec_card = array();
+        // foreach($deck_cards as $card){
+        //     $cards_info=Card::where('id','=',$card->card_id)->orderByRaw('cast(cost as signed) asc')->paginate(20);
+        //     foreach($cards_info as $card_info){
+        //         //echo $card_info->card_name;
+        //     array_push($make_dec_card,$card_info);
+        //     }
+        // }
 
-        return view('search', compact('make_dec_card'));
+    return redirect('/');  
     }
 }
 
