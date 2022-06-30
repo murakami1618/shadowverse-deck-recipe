@@ -1,0 +1,9 @@
+   <div style="display:inline-flex">
+        @foreach($cards as $card)
+          <form action="{{ route('post') }}" method='post'>
+            @csrf
+            <input type='hidden' name='card' value='{{$card->card_name}}'>
+            <input type="image" src='{{$card->card_img_url}}' class='p-1'>
+          </form>
+        @endforeach
+        </div>
