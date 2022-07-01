@@ -21,10 +21,13 @@ use App\Http\Controllers\MainController;
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/card/search', [CardSearch::class, 'card_search'])->name('card/search');
-Route::post('/card/search', [CardSearch::class, 'card_search'])->name('card/search');
-Route::get('/search', [CardSearch::class, 'search_post'])->name('search');
 Route::get('/', [MainController::class, 'get_decks'])->name('/');
-Route::post('/post', [CardSearch::class, 'post'])->name('post');
-Route::get('/post', [CardSearch::class, 'post'])->name('post');
+
+Route::get('/card/search', [MainController::class, 'card_search'])->name('card/search');
+Route::post('/card/search', [MainController::class, 'card_search'])->name('card/search');
+
+Route::get('/search', [MainController::class, 'search_post'])->name('search');
+Route::post('/post', [MainController::class, 'post'])->name('post');
+Route::get('/post', [MainController::class, 'post'])->name('post');
 Route::post('/deck', [MainController::class, 'get_cards'])->name('deck');
+
