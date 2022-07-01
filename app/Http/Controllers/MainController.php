@@ -52,7 +52,9 @@ class MainController extends Controller
                 {
 
                 }
-                array_push($hairetu_card,$card);
+                if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
+                    array_push($hairetu_card,$card);
+                }
             }
         $class_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=',$request->deckclass]])->orderByRaw('cast(cost as signed) asc')->paginate(20);
         $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])->orderByRaw('cast(cost as signed) asc')->paginate(20);

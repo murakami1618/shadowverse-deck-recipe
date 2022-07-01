@@ -9,6 +9,7 @@
           @foreach($hairetu_card as $card)
             <form action="{{ route('post') }}" method='post'>
               @csrf
+              <input type='hidden' name='cardtype' value='{{$card->card_type}}'>
               <input type='hidden' name='cardid' value='{{$card->id}}'>
               <input type='hidden' name='deckid' value='{{$deck_id}}'>
               <input type="hidden" name="deckclass" value="{{ $deck_class }}">
@@ -48,6 +49,7 @@
             @foreach($class_cards as $card)
               <form action="{{ route('post') }}" method='post'>
                 @csrf
+                <input type='hidden' name='cardtype' value='{{$card->card_type}}'>
                 <input type='hidden' name='cardid' value='{{$card->id}}'>
                 <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
                 <input type='hidden' name='deckid' value='{{$deck_id}}'>
@@ -78,6 +80,7 @@
                 @foreach($neutral_cards as $card)
                   <form action="{{ route('post') }}" method='post'>
                     @csrf
+                    <input type='hidden' name='cardtype' value='{{$card->card_type}}'>
                     <input type='hidden' name='cardid' value='{{$card->id}}'>
                     <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
                     <input type='hidden' name='deckid' value='{{$deck_id}}'>
