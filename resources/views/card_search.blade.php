@@ -40,6 +40,7 @@
               @csrf
               <input type='text' name='search_card' placeholder='カード名を入力'>
               <input type='hidden' name='deckid' value='{{$deck_id}}'>
+              <input type='hidden' name='deckclass' value='{{$deck_class}}'>
               <input type='submit'>
             </form>
           <?php $i=0; ?>
