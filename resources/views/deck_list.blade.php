@@ -2,10 +2,11 @@
 @section('content')
 
 @foreach($decks as $deck)
-<form action="{{ route('deck') }}" method="post">
+<form action="{{ route('card/search') }}" method="post">
 @csrf
         <input type="image" src="{{ $deck->leader_card }}">
-        <input type="hidden" name="deck_id" value="{{ $deck->id }}">
+        <input type="hidden" name="deckid" value="{{ $deck->id }}">
+        <input type="hidden" name="deckclass" value="{{ $deck->deck_class }}">
     </form>    
     </br>
     <a>{{ $deck->deck_class }}</a>
