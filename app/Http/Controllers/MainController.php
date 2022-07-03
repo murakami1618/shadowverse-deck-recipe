@@ -79,4 +79,16 @@ class MainController extends Controller
     ]));
     }
 
+    public function card_delete(Request $request)
+    {
+        $delete_cards = Deck_card::where([['card_id', '=', $request->cardid],['deck_id', '=', $request->deckid]])->get();
+        foreach($delete_cards as $delete_card)
+        {
+        }
+        Deck_card::destroy($delete_card->id);
+    
+        return redirect(route('card/search', [
+            $request,
+        ]));
+    }
 }
