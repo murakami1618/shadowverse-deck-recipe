@@ -7,7 +7,7 @@
         <?php $i=0; ?>
         <div style="display:inline-flex" >
           @foreach($hairetu_card as $card)
-            <form action="{{ route('post') }}" method='post'>
+            <form action="{{ route('card/delete') }}" method='post'>
               @csrf
               <input type='hidden' name='cardtype' value='{{$card->card_type}}'>
               <input type='hidden' name='cardid' value='{{$card->id}}'>

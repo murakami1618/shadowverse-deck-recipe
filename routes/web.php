@@ -30,4 +30,5 @@ Route::get('/search', [MainController::class, 'search_post'])->name('search');
 Route::post('/post', [MainController::class, 'post'])->name('post');
 Route::get('/post', [MainController::class, 'post'])->name('post');
 Route::post('/deck', [MainController::class, 'get_cards'])->name('deck');
+Route::post('/card/delete', [MainController::class, 'card_delete'])->name('card/delete');
 
