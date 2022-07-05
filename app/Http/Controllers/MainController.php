@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Deck;
 use App\Models\Card;
 use App\Models\Deck_card;
+use App\Models\Extra_deck;
 
 class MainController extends Controller
 {
@@ -69,6 +70,26 @@ class MainController extends Controller
 
     public function post(Request $request)
     {
+        if($request->cardtype === "フォロワー・エボルヴ")
+        {
+            $card_counts = Extra_deck::where([['deck_id', '=', $request->deckid],['card_id', '=', $request->cardid]])->count();
+            $cards_counts = Extra_deck::where('deck_id', '=', $request->deckid)->count();
+
+            if($cards_counts <= 9 && $card_counts <= 2){
+                $Extra_deck = new Extra_deck();
+                $Extra_deck->deck_id = $request->deckid;
+                $Extra_deck->card_id = $request->cardid;
+                $Extra_deck->save();
+                return redirect(route('card/search', [
+                    $request,
+                ]));
+            }elseif($card_counts >= 2){
+                echo "同じカードは3枚以下にしてください";
+            }elseif($cards_counts >= 9){
+                echo "カードを10枚以下にしてください";
+            }
+        }
+
         $card_counts = Deck_card::where([['deck_id', '=', $request->deckid],['card_id', '=', $request->cardid]])->count();
         $cards_counts = Deck_card::where('deck_id', '=', $request->deckid)->count();
         if($cards_counts <= 49 && $card_counts <= 2)
