@@ -147,4 +147,39 @@ class MainController extends Controller
             $request,
         ]));
     }
+
+    public function deck_create(Request $request)
+    {
+        $deck_create = new Deck;
+        switch ($request->deckclass) {
+            case "エルフ":
+                $leader_card = "https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/SD01/SD01-LD01.png";
+                break;
+            case "ロイヤル":
+                $leader_card = "https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/SD02/SD02-LD01.png";
+                break;
+            case "ウィッチ":
+                $leader_card = "https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP01/bp01_ld05.png";
+                break;
+            case "ドラゴン":
+            $leader_card = "https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP01/bp01_ld07.png";
+                break;
+            case "ナイトメア":
+            $leader_card = "https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP01/bp01_ld09.png";
+                break;
+            case "ビショップ":
+            $leader_card = "https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/SD06/SD06-LD01.png";
+                break;
+        }
+       
+        $deck_create->leader_card = $leader_card;
+        $deck_create->deck_name = $request->deckname;
+        $deck_create->deck_class = $request->deckclass;
+        $deck_create->make_user_id = $request->user_id;
+        $deck_create->save();
+        
+        return redirect(route('card/search', [
+            $request,
+        ]));
+    }
 }
