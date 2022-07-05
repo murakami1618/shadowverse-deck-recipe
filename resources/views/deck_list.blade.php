@@ -1,6 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
+<form action="{{ route('card/search') }}" method="post">
+@csrf
+    <input type="text" name="deck_name" placeholder="デッキ名" class="text-center">
+        <select name="deckclass">
+            <option value="エルフ">エルフ</option>
+            <option value="ロイヤル">ロイヤル</option>
+            <option value="ウィッチ">ウィッチ</option>
+            <option value="ドラゴン">ドラゴン</option>
+            <option value="ナイトメア">ナイトメア</option>
+            <option value="ビショップ">ビショップ</option>
+        </select>
+    <input type='hidden' name='user_id' value='{{ Auth::user()->id }}'>
+    <button type="submit">送信</button>
+</form>
 <div class="container">
     <div class="row">
         @foreach($decks as $deck)
