@@ -147,7 +147,7 @@ class MainController extends Controller
         }
        
         $deck_create->leader_card = $leader_card;
-        $deck_create->deck_name = $request->deck_name;
+        $deck_create->deck_name = $request->deckname;
         $deck_create->deck_class = $request->deckclass;
         $deck_create->make_user_id = $request->user_id;
         $deck_create->save();

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<form action="{{ route('card/search') }}" method="post">
+<form action="{{ route('deck/create') }}" method="post">
 @csrf
-    <input type="text" name="deck_name" placeholder="デッキ名" class="text-center">
+    <input type="text" name="deckname" placeholder="デッキ名" class="text-center">
         <select name="deckclass">
             <option value="エルフ">エルフ</option>
             <option value="ロイヤル">ロイヤル</option>
@@ -24,6 +24,7 @@
                         @csrf
                         <input type="image" src="{{ $deck->leader_card }}" class="card-img-top" alt="leader_card">
                         <input type="hidden" name="deckid" value="{{ $deck->id }}">
+                        <input type="hidden" name="deckname" value="{{ $deck->name }}">
                         <input type="hidden" name="deckclass" value="{{ $deck->deck_class }}">
                     </form>
                     <ul class="list-group list-group-flush">
