@@ -44,6 +44,7 @@ class MainController extends Controller
         $deck_id=$request->deckid;
         $deck_class=$request->deckclass;
         $hairetu_card = array();
+        $ex_cards = array();
         $card_lists = Deck_card::where('deck_id', '=', $request->deckid)->get();
             foreach($card_lists as $card_list)
             {
@@ -57,9 +58,23 @@ class MainController extends Controller
                     array_push($hairetu_card,$card);
                 }
             }
+
+            $card_lists = Extra_deck::where('deck_id', '=', $request->deckid)->get();
+            foreach($card_lists as $card_list)
+            {
+                $card_id = $card_list->card_id;
+                $cards = Card::where('id', '=', $card_id)->get();
+                foreach($cards as $card)
+                {
+
+                }
+                    array_push($ex_cards,$card);
+            }
+
+
         $class_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=',$request->deckclass]])->orderByRaw('cast(cost as signed) asc')->paginate(20);
         $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])->orderByRaw('cast(cost as signed) asc')->paginate(20);
-        return view('card_search', compact('class_cards','neutral_cards','hairetu_card','deck_id','deck_class'));
+        return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class'));
     }
 
     public function search_post()
@@ -111,6 +126,17 @@ class MainController extends Controller
 
     public function card_delete(Request $request)
     {
+        if($request->cardtype =="フォロワー・エボルヴ"){
+            $delete_cards = Extra_deck::where([['card_id', '=', $request->cardid],['deck_id', '=', $request->deckid]])->get();
+            foreach($delete_cards as $delete_card)
+            {
+            }
+            Extra_deck::destroy($delete_card->id);
+            return redirect(route('card/search', [
+                $request,
+            ]));
+        }
+
         $delete_cards = Deck_card::where([['card_id', '=', $request->cardid],['deck_id', '=', $request->deckid]])->get();
         foreach($delete_cards as $delete_card)
         {
