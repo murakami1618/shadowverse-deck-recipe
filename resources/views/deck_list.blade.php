@@ -2,7 +2,7 @@
 
 @section('content')
 <form action="{{ route('deck/create') }}" method="post">
-@csrf
+    @csrf
     <input type="text" name="deckname" placeholder="デッキ名" class="text-center">
         <select name="deckclass">
             <option value="エルフ">エルフ</option>
@@ -13,7 +13,7 @@
             <option value="ビショップ">ビショップ</option>
         </select>
     <input type='hidden' name='user_id' value='{{ Auth::user()->id }}'>
-    <button type="submit">送信</button>
+    <button type="submit">作成</button>
 </form>
 <div class="container">
     <div class="row">
@@ -30,6 +30,11 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item text-center">{{ $deck->deck_class }}</li>
                         <li class="list-group-item text-center">{{ $deck->deck_name }}</li>
+                        <form action="{{ route('deck/delete') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="deckid" value="{{ $deck->id }}">
+                            <button type="submit">削除</button>
+                        </form>
                     </ul>
                 </div>
             </div> 
