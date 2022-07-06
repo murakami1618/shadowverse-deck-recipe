@@ -1,20 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<form action="{{ route('deck/create') }}" method="post">
-    @csrf
-    <input type="text" name="deckname" placeholder="デッキ名" class="text-center">
-        <select name="deckclass">
-            <option value="エルフ">エルフ</option>
-            <option value="ロイヤル">ロイヤル</option>
-            <option value="ウィッチ">ウィッチ</option>
-            <option value="ドラゴン">ドラゴン</option>
-            <option value="ナイトメア">ナイトメア</option>
-            <option value="ビショップ">ビショップ</option>
-        </select>
-    <input type='hidden' name='user_id' value='{{ Auth::user()->id }}'>
-    <button type="submit">作成</button>
-</form>
 <div class="container">
     <div class="row">
         @foreach($decks as $deck)
@@ -28,17 +14,46 @@
                         <input type="hidden" name="deckclass" value="{{ $deck->deck_class }}">
                     </form>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item text-center">{{ $deck->deck_class }}</li>
-                        <li class="list-group-item text-center">{{ $deck->deck_name }}</li>
+                        <li class="list-group-item text-center p-3">{{ $deck->deck_name }}</li>
+                        <li class="list-group-item text-center p-3">{{ $deck->deck_class }}</li>
                         <form action="{{ route('deck/delete') }}" method="post">
                             @csrf
                             <input type="hidden" name="deckid" value="{{ $deck->id }}">
-                            <button type="submit">削除</button>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-outline-danger">削除</button>
+                            </div>
                         </form>
                     </ul>
                 </div>
             </div> 
         @endforeach
+        <div class="col-3 p-4">
+                <div class="card">
+                        <img src="https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_107.png" class="card-img-top " alt="leader_card">
+                    <ul class="list-group list-group-flush">
+                        <form action="{{ route('deck/create') }}" method="post">
+                            @csrf
+                            <li class="list-group-item text-center">
+                                <input type="text" name="deckname" placeholder="デッキ名" class="text-center form-control">
+                                <input type='hidden' name='user_id' value='{{ Auth::user()->id }}'>
+                            </li>
+                            <li class="list-group-item text-center"> 
+                                <select class="form-select p-2" aria-label="Default select example" name="deckclass">
+                                    <option value="エルフ">エルフ</option>
+                                    <option value="ロイヤル">ロイヤル</option>
+                                    <option value="ウィッチ">ウィッチ</option>
+                                    <option value="ドラゴン">ドラゴン</option>
+                                    <option value="ナイトメア">ナイトメア</option>
+                                    <option value="ビショップ">ビショップ</option>
+                                </select>
+                            </li>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-outline-primary">作成</button>
+                            </div>
+                        </form>
+                    </ul>
+                </div>
+            </div> 
     </div>
 </div>
 @endsection
