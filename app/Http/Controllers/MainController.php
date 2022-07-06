@@ -182,4 +182,15 @@ class MainController extends Controller
             $request,
         ]));
     }
+
+    public function deck_delete(Request $request)
+    {
+        $deck_id = $request->deckid;
+        Deck::where('id', '=', $deck_id)->delete();
+        Deck_card::where('deck_id', '=', $deck_id)->delete();
+        
+        return redirect(route('/', [
+            $request,
+        ]));
+    }
 }
