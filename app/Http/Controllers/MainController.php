@@ -178,7 +178,7 @@ class MainController extends Controller
         $deck_create->make_user_id = $request->user_id;
         $deck_create->save();
         
-        return redirect(route('card/search', [
+        return redirect(route('/', [
             $request,
         ]));
     }

@@ -34,11 +34,11 @@
                         <form action="{{ route('deck/create') }}" method="post">
                             @csrf
                             <li class="list-group-item text-center">
-                                <input type="text" name="deckname" placeholder="デッキ名" class="text-center form-control">
+                                <input type="text" name="deckname" placeholder="デッキ名" class="text-center form-control" required>
                                 <input type='hidden' name='user_id' value='{{ Auth::user()->id }}'>
                             </li>
                             <li class="list-group-item text-center"> 
-                                <select class="form-select p-2" aria-label="Default select example" name="deckclass">
+                                <select class="form-select p-2 text-center" aria-label="Default select example" name="deckclass">
                                     <option value="エルフ">エルフ</option>
                                     <option value="ロイヤル">ロイヤル</option>
                                     <option value="ウィッチ">ウィッチ</option>
