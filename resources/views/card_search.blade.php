@@ -48,12 +48,14 @@
                 @foreach($ex_cards as $card)
                   <form action="{{ route('card/delete') }}" method='post'>
                     @csrf
-                    <input type='hidden' name='cardtype' value='{{$card->card_type}}'>
-                    <input type='hidden' name='cardid' value='{{$card->id}}'>
-                    <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
-                    <input type='hidden' name='deckid' value='{{$deck_id}}'>
-                    <input type="hidden" name="deckclass" value="{{ $deck_class }}">
-                    {{ $card->count }}
+                    <div class='card border-0 text-center '>
+                      <input type='hidden' name='cardtype' value='{{$card->card_type}}'>
+                      <input type='hidden' name='cardid' value='{{$card->id}}'>
+                      <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
+                      <input type='hidden' name='deckid' value='{{$deck_id}}'>
+                      <input type="hidden" name="deckclass" value="{{ $deck_class }}">
+                      {{ $card->count }}
+                    </div>
                   </form>
                   <?php $i++; ?>
                   @if( $i == 10)
