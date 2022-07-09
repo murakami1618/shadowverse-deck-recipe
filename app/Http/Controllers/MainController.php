@@ -41,6 +41,7 @@ class MainController extends Controller
 //リファクタリング(元CardSerach コントローラーの処理)
     public function card_search(Request $request)
     {
+        $error="";
         $deck_id=$request->deckid;
         $deck_class=$request->deckclass;
         $hairetu_card = array();
@@ -74,8 +75,127 @@ class MainController extends Controller
 
         $class_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=',$request->deckclass]])->orderByRaw('cast(cost as signed) asc')->paginate(20);
         $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])->orderByRaw('cast(cost as signed) asc')->paginate(20);
-        return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class'));
+        return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error'));
     }
+
+    public function card_search_error_card(Request $request)
+    {
+        $error = "同じカードは3枚以下にしてください。";
+        $deck_id=$request->deckid;
+        $deck_class=$request->deckclass;
+        $hairetu_card = array();
+        $ex_cards = array();
+        $card_lists = Deck_card::where('deck_id', '=', $request->deckid)->get();
+            foreach($card_lists as $card_list)
+            {
+                $card_id = $card_list->card_id;
+                $cards = Card::where('id', '=', $card_id)->get();
+                foreach($cards as $card)
+                {
+
+                }
+                if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
+                    array_push($hairetu_card,$card);
+                }
+            }
+
+            $card_lists = Extra_deck::where('deck_id', '=', $request->deckid)->get();
+            foreach($card_lists as $card_list)
+            {
+                $card_id = $card_list->card_id;
+                $cards = Card::where('id', '=', $card_id)->get();
+                foreach($cards as $card)
+                {
+
+                }
+                    array_push($ex_cards,$card);
+            }
+
+
+        $class_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=',$request->deckclass]])->orderByRaw('cast(cost as signed) asc')->paginate(20);
+        $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])->orderByRaw('cast(cost as signed) asc')->paginate(20);
+        return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error'));
+    }
+
+    public function card_search_error_deck(Request $request)
+    {
+        $error = "デッキは50枚以下にしてください。";
+        $deck_id=$request->deckid;
+        $deck_class=$request->deckclass;
+        $hairetu_card = array();
+        $ex_cards = array();
+        $card_lists = Deck_card::where('deck_id', '=', $request->deckid)->get();
+            foreach($card_lists as $card_list)
+            {
+                $card_id = $card_list->card_id;
+                $cards = Card::where('id', '=', $card_id)->get();
+                foreach($cards as $card)
+                {
+
+                }
+                if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
+                    array_push($hairetu_card,$card);
+                }
+            }
+
+            $card_lists = Extra_deck::where('deck_id', '=', $request->deckid)->get();
+            foreach($card_lists as $card_list)
+            {
+                $card_id = $card_list->card_id;
+                $cards = Card::where('id', '=', $card_id)->get();
+                foreach($cards as $card)
+                {
+
+                }
+                    array_push($ex_cards,$card);
+            }
+
+
+        $class_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=',$request->deckclass]])->orderByRaw('cast(cost as signed) asc')->paginate(20);
+        $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])->orderByRaw('cast(cost as signed) asc')->paginate(20);
+        return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error'));
+    }
+
+    public function card_search_error_exdeck(Request $request)
+    {
+        $error = "エクストラデッキは10枚以下にしてください。";
+        $deck_id=$request->deckid;
+        $deck_class=$request->deckclass;
+        $hairetu_card = array();
+        $ex_cards = array();
+        $card_lists = Deck_card::where('deck_id', '=', $request->deckid)->get();
+            foreach($card_lists as $card_list)
+            {
+                $card_id = $card_list->card_id;
+                $cards = Card::where('id', '=', $card_id)->get();
+                foreach($cards as $card)
+                {
+
+                }
+                if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
+                    array_push($hairetu_card,$card);
+                }
+            }
+
+            $card_lists = Extra_deck::where('deck_id', '=', $request->deckid)->get();
+            foreach($card_lists as $card_list)
+            {
+                $card_id = $card_list->card_id;
+                $cards = Card::where('id', '=', $card_id)->get();
+                foreach($cards as $card)
+                {
+
+                }
+                    array_push($ex_cards,$card);
+            }
+
+
+        $class_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=',$request->deckclass]])->orderByRaw('cast(cost as signed) asc')->paginate(20);
+        $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])->orderByRaw('cast(cost as signed) asc')->paginate(20);
+        return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error'));
+    }
+
+
 
     public function search_post()
     {
@@ -98,10 +218,14 @@ class MainController extends Controller
                 return redirect(route('card/search', [
                     $request,
                 ]));
-            }elseif($card_counts >= 2){
-                echo "同じカードは3枚以下にしてください";
-            }elseif($cards_counts >= 9){
-                echo "カードを10枚以下にしてください";
+            }elseif($card_counts >= 3){
+                return redirect(route('card/search/error/card', [
+                    $request,
+                ]));
+            }elseif($cards_counts >= 10){
+                return redirect(route('card/search/error/exdeck', [
+                    $request,
+                ]));
             }
         }
 
@@ -117,10 +241,14 @@ class MainController extends Controller
             return redirect(route('card/search', [
                 $request,
             ]));
-        }elseif($card_counts >= 2){
-            echo "同じカードは3枚以下にしてください";
-        }elseif($cards_counts >= 49){
-            echo "カードを50枚以下にしてください";
+        }elseif($card_counts >= 3){
+            return redirect(route('card/search/error/card', [
+                $request,
+            ]));
+        }elseif($cards_counts >= 50){
+            return redirect(route('card/search/error/deck', [
+                $request,
+            ]));
         }
     }
 

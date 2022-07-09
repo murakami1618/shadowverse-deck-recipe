@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="container">
-
       <div class="justify-content-center card-body row card">
+      {{  $error  }}
       <ul class="nav nav-tabs mt-5" role="tablist">
           <li class="nav-item" role="presentation">
             <a href="#photo1" id="tab1" class="nav-link active" role="tab" data-bs-toggle="tab" aria-selected="true"> {{ $deck_class }} </a>
@@ -17,13 +17,6 @@
 
         <div id="photo1" class="tab-pane active" role="tabpanel" aria-labelledby="tab1">
           <div class="justify-content-center card-body row">
-            <form action="{{ route('card/search') }}" method='post'> 
-              @csrf
-              <input type='text' name='search_card' placeholder='カード名を入力'>
-              <input type='hidden' name='deckid' value='{{$deck_id}}'>
-              <input type='hidden' name='deckclass' value='{{$deck_class}}'>
-              <input type='submit'>
-            </form>
           <?php $i=0; ?>
           <div style="display:inline-flex" >
             @foreach($hairetu_card as $card)
@@ -47,12 +40,6 @@
 
       <div id="photo2" class="tab-pane" role="tabpanel" aria-labelledby="tab2">
         <div class="justify-content-md-center card-body row">
-          <form action="{{ route('card/search') }}" method='post'> 
-            @csrf
-            <input type='text' name='search_card' placeholder='カード名を入力'>
-            <input type='hidden' name='deckid' value='{{$deck_id}}'>
-            <input type='submit'>
-          </form>
           <?php $i=0; ?>
             <div style="display:inline-flex" >
                 @foreach($ex_cards as $card)
