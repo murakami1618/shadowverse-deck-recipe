@@ -56,7 +56,13 @@ class MainController extends Controller
 
                 }
                 if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
+                    if(in_array($card->card_name, array_column($hairetu_card, 'card_name'))) {
+                        $card['count'] = $card_counts;
+                    }else{
+                    $card_counts = Deck_card::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
+                    $card['count'] = $card_counts;
                     array_push($hairetu_card,$card);
+                    }
                 }
             }
 
@@ -69,7 +75,13 @@ class MainController extends Controller
                 {
 
                 }
-                    array_push($ex_cards,$card);
+                if(in_array($card->card_name, array_column($ex_cards, 'card_name'))) {
+                    $card['count'] = $card_counts;
+                }else{
+                $card_counts = Extra_deck::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
+                $card['count'] = $card_counts;
+                array_push($ex_cards,$card);
+                }
             }
 
 
@@ -95,7 +107,13 @@ class MainController extends Controller
 
                 }
                 if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
+                    if(in_array($card->card_name, array_column($hairetu_card, 'card_name'))) {
+                        $card['count'] = $card_counts;
+                    }else{
+                    $card_counts = Deck_card::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
+                    $card['count'] = $card_counts;
                     array_push($hairetu_card,$card);
+                    }
                 }
             }
 
@@ -108,7 +126,13 @@ class MainController extends Controller
                 {
 
                 }
-                    array_push($ex_cards,$card);
+                if(in_array($card->card_name, array_column($ex_cards, 'card_name'))) {
+                    $card['count'] = $card_counts;
+                }else{
+                $card_counts = Extra_deck::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
+                $card['count'] = $card_counts;
+                array_push($ex_cards,$card);
+                }
             }
 
 
@@ -134,7 +158,13 @@ class MainController extends Controller
 
                 }
                 if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
+                    if(in_array($card->card_name, array_column($hairetu_card, 'card_name'))) {
+                        $card['count'] = $card_counts;
+                    }else{
+                    $card_counts = Deck_card::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
+                    $card['count'] = $card_counts;
                     array_push($hairetu_card,$card);
+                    }
                 }
             }
 
@@ -147,7 +177,13 @@ class MainController extends Controller
                 {
 
                 }
-                    array_push($ex_cards,$card);
+                if(in_array($card->card_name, array_column($ex_cards, 'card_name'))) {
+                    $card['count'] = $card_counts;
+                }else{
+                $card_counts = Extra_deck::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
+                $card['count'] = $card_counts;
+                array_push($ex_cards,$card);
+                }
             }
 
 
@@ -173,7 +209,13 @@ class MainController extends Controller
 
                 }
                 if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
+                    if(in_array($card->card_name, array_column($hairetu_card, 'card_name'))) {
+                        $card['count'] = $card_counts;
+                    }else{
+                    $card_counts = Deck_card::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
+                    $card['count'] = $card_counts;
                     array_push($hairetu_card,$card);
+                    };
                 }
             }
 
@@ -186,7 +228,13 @@ class MainController extends Controller
                 {
 
                 }
-                    array_push($ex_cards,$card);
+                    if(in_array($card->card_name, array_column($ex_cards, 'card_name'))) {
+                    $card['count'] = $card_counts;
+                }else{
+                $card_counts = Extra_deck::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
+                $card['count'] = $card_counts;
+                array_push($ex_cards,$card);
+                }
             }
 
 
