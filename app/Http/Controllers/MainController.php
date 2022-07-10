@@ -32,7 +32,6 @@ class MainController extends Controller
                 $cards = Card::where('id', '=', $card_id)->orderByRaw('cost','asc')->get();
                 foreach($cards as $card)
                 {
-                    echo $card->card_name;
                 }
                 array_push($hairetu_card,$card);
             }
