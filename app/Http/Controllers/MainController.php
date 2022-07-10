@@ -29,15 +29,16 @@ class MainController extends Controller
             foreach($card_lists as $card_list)
             {
                 $card_id = $card_list->card_id;
-                $cards = Card::where('id', '=', $card_id)->get();
+                $cards = Card::where('id', '=', $card_id)->orderByRaw('cost','asc')->get();
                 foreach($cards as $card)
                 {
-
+                    echo $card->card_name;
                 }
                 array_push($hairetu_card,$card);
             }
-        return view('deck',compact('hairetu_card'));
+        // return view('deck',compact('hairetu_card'));
     }
+    
 //リファクタリング(元CardSerach コントローラーの処理)
     public function card_search(Request $request)
     {
@@ -84,7 +85,7 @@ class MainController extends Controller
                 }
             }
 
-
+        array_multisort(array_column($hairetu_card, 'cost'), SORT_ASC, $hairetu_card);
         $class_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=',$request->deckclass]])->orderByRaw('cast(cost as signed) asc')->paginate(20);
         $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])->orderByRaw('cast(cost as signed) asc')->paginate(20);
         return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error'));
@@ -135,7 +136,7 @@ class MainController extends Controller
                 }
             }
 
-
+        array_multisort(array_column($hairetu_card, 'cost'), SORT_ASC, $hairetu_card);
         $class_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=',$request->deckclass]])->orderByRaw('cast(cost as signed) asc')->paginate(20);
         $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])->orderByRaw('cast(cost as signed) asc')->paginate(20);
         return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error'));
@@ -186,7 +187,7 @@ class MainController extends Controller
                 }
             }
 
-
+        array_multisort(array_column($hairetu_card, 'cost'), SORT_ASC, $hairetu_card);
         $class_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=',$request->deckclass]])->orderByRaw('cast(cost as signed) asc')->paginate(20);
         $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])->orderByRaw('cast(cost as signed) asc')->paginate(20);
         return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error'));
@@ -237,7 +238,7 @@ class MainController extends Controller
                 }
             }
 
-
+        array_multisort(array_column($hairetu_card, 'cost'), SORT_ASC, $hairetu_card);
         $class_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=',$request->deckclass]])->orderByRaw('cast(cost as signed) asc')->paginate(20);
         $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])->orderByRaw('cast(cost as signed) asc')->paginate(20);
         return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error'));
@@ -307,7 +308,9 @@ class MainController extends Controller
             foreach($delete_cards as $delete_card)
             {
             }
-            Extra_deck::destroy($delete_card->id);
+            if(!empty($delete_card->id)){
+                Extra_deck::destroy($delete_card->id);
+            }
             return redirect(route('card/search', [
                 $request,
             ]));
@@ -317,7 +320,9 @@ class MainController extends Controller
         foreach($delete_cards as $delete_card)
         {
         }
-        Deck_card::destroy($delete_card->id);
+        if(!empty($delete_card->id)){
+            Deck_card::destroy($delete_card->id);
+        }
     
         return redirect(route('card/search', [
             $request,
