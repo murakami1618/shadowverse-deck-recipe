@@ -16,16 +16,16 @@
       <div class="tab-content">
 
         <div id="photo1" class="tab-pane active" role="tabpanel" aria-labelledby="tab1">
-          <div class="justify-content-center card-body row">
+          <div class="justify-content-center card-body">
           <?php $i=0; ?>
           <div style="display:inline-flex" >
             @foreach($hairetu_card as $card)
               <form action="{{ route('card/delete') }}" method='post'>
                 @csrf
-                <div class='card border-0 text-center '>
+                <div class='card border-0 text-center'>
                   <input type='hidden' name='cardtype' value='{{$card->card_type}}'>
                   <input type='hidden' name='cardid' value='{{$card->id}}'>
-                  <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
+                  <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 6.5vw";>
                   <input type='hidden' name='deckid' value='{{$deck_id}}'>
                   <input type="hidden" name="deckclass" value="{{ $deck_class }}">
                   {{ $card->count }}
@@ -51,7 +51,7 @@
                     <div class='card border-0 text-center '>
                       <input type='hidden' name='cardtype' value='{{$card->card_type}}'>
                       <input type='hidden' name='cardid' value='{{$card->id}}'>
-                      <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
+                      <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 6.5vw";>
                       <input type='hidden' name='deckid' value='{{$deck_id}}'>
                       <input type="hidden" name="deckclass" value="{{ $deck_class }}">
                       {{ $card->count }}
@@ -95,7 +95,7 @@
                 @csrf
                 <input type='hidden' name='cardtype' value='{{$card->card_type}}'>
                 <input type='hidden' name='cardid' value='{{$card->id}}'>
-                <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
+                <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 6.5vw";>
                 <input type='hidden' name='deckid' value='{{$deck_id}}'>
                 <input type="hidden" name="deckclass" value="{{ $deck_class }}">
               </form>
@@ -126,7 +126,7 @@
                     @csrf
                     <input type='hidden' name='cardtype' value='{{$card->card_type}}'>
                     <input type='hidden' name='cardid' value='{{$card->id}}'>
-                    <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 125px";>
+                    <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 6.5vw";>
                     <input type='hidden' name='deckid' value='{{$deck_id}}'>
                     <input type="hidden" name="deckclass" value="{{ $deck_class }}">
                   </form>
