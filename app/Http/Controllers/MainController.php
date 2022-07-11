@@ -380,6 +380,20 @@ class MainController extends Controller
             ]));
         }
 
+        if(preg_match('/トークン/',$request->cardtype)){
+            $delete_cards = Token::where([['card_id', '=', $request->cardid],['deck_id', '=', $request->deckid]])->get();
+            foreach($delete_cards as $delete_card)
+            {
+            }
+            if(!empty($delete_card->id)){
+                Token::destroy($delete_card->id);
+            }
+            return redirect(route('card/search', [
+                $request,
+            ]));
+        }
+
+
         $delete_cards = Deck_card::where([['card_id', '=', $request->cardid],['deck_id', '=', $request->deckid]])->get();
         foreach($delete_cards as $delete_card)
         {
