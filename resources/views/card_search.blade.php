@@ -355,7 +355,7 @@
         <div id="phonetoken" class="tab-pane" role="tabpanel" aria-labelledby="tab2">
           <div class="justify-content-md-center card-body row">
               <?php $i=0; ?>
-              <div style="display:inline-flex" >
+              <div style="display:inline-flex">
                 @foreach($tokens as $card)
                   <form action="{{ route('card/delete') }}" method='post'>
                     @csrf
