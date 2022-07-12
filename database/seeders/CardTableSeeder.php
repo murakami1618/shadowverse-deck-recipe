@@ -379,16 +379,6 @@ class CardTableSeeder extends Seeder
                 'card_rea' => 'BR',
                 'card_type' => 'スペル',
             ),
-            36 => 
-            array (
-                'id' => 37,
-                'card_name' => 'ゴブリン',
-                'cost' => '-',
-                'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/SD02/SD02-018.png',
-                'card_class' => 'ニュートラル',
-                'card_rea' => 'BR',
-                'card_type' => 'フォロワー・エボルヴ',
-            ),
             37 => 
             array (
                 'id' => 38,
@@ -929,16 +919,6 @@ class CardTableSeeder extends Seeder
                 'card_rea' => 'BR',
                 'card_type' => 'スペル',
             ),
-            91 => 
-            array (
-                'id' => 92,
-                'card_name' => 'ゴリアテ',
-                'cost' => '-',
-                'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/SD05/SD05-019.png',
-                'card_class' => 'ニュートラル',
-                'card_rea' => 'BR',
-                'card_type' => 'フォロワー・エボルヴ',
-            ),
             92 => 
             array (
                 'id' => 93,
@@ -966,16 +946,6 @@ class CardTableSeeder extends Seeder
                 'cost' => '-',
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/SD05/SD05-013.png',
                 'card_class' => 'ナイトメア',
-                'card_rea' => 'BR',
-                'card_type' => 'フォロワー・エボルヴ',
-            ),
-            95 => 
-            array (
-                'id' => 96,
-                'card_name' => 'ゴリアテ',
-                'cost' => '-',
-                'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/SD05/SD05-019.png',
-                'card_class' => 'ニュートラル',
                 'card_rea' => 'BR',
                 'card_type' => 'フォロワー・エボルヴ',
             ),
@@ -1139,16 +1109,6 @@ class CardTableSeeder extends Seeder
                 'card_rea' => 'BR',
                 'card_type' => 'アミュレット',
             ),
-            112 => 
-            array (
-                'id' => 113,
-                'card_name' => 'ヒーリングエンジェル',
-                'cost' => '-',
-                'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/SD06/SD06-019.png',
-                'card_class' => 'ニュートラル',
-                'card_rea' => 'BR',
-                'card_type' => 'フォロワー・エボルヴ',
-            ),
             113 => 
             array (
                 'id' => 114,
@@ -1176,16 +1136,6 @@ class CardTableSeeder extends Seeder
                 'cost' => '-',
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/SD06/SD06-012.png',
                 'card_class' => 'ビショップ',
-                'card_rea' => 'BR',
-                'card_type' => 'フォロワー・エボルヴ',
-            ),
-            116 => 
-            array (
-                'id' => 117,
-                'card_name' => 'ヒーリングエンジェル',
-                'cost' => '-',
-                'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/SD06/SD06-019.png',
-                'card_class' => 'ニュートラル',
                 'card_rea' => 'BR',
                 'card_type' => 'フォロワー・エボルヴ',
             ),
@@ -2649,36 +2599,6 @@ class CardTableSeeder extends Seeder
                 'card_rea' => 'SR',
                 'card_type' => 'スペル',
             ),
-            263 => 
-            array (
-                'id' => 264,
-                'card_name' => 'ゴブリン',
-                'cost' => '-',
-                'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP01/bp01_172.png',
-                'card_class' => 'ニュートラル',
-                'card_rea' => 'BR',
-                'card_type' => 'フォロワー・エボルヴ',
-            ),
-            264 => 
-            array (
-                'id' => 265,
-                'card_name' => 'ゴリアテ',
-                'cost' => '-',
-                'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP01/bp01_175.png',
-                'card_class' => 'ニュートラル',
-                'card_rea' => 'BR',
-                'card_type' => 'フォロワー・エボルヴ',
-            ),
-            265 => 
-            array (
-                'id' => 266,
-                'card_name' => 'ヒーリングエンジェル',
-                'cost' => '-',
-                'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP01/bp01_178.png',
-                'card_class' => 'ニュートラル',
-                'card_rea' => 'BR',
-                'card_type' => 'フォロワー・エボルヴ',
-            ),
             266 => 
             array (
                 'id' => 267,
@@ -2697,7 +2617,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_102.png',
                 'card_class' => 'ビショップ',
                 'card_rea' => 'BR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             268 => 
             array (
@@ -3697,7 +3617,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_039.png',
                 'card_class' => 'ウィッチ',
                 'card_rea' => 'GR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             368 => 
             array (
@@ -3707,7 +3627,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_043.png',
                 'card_class' => 'ウィッチ',
                 'card_rea' => 'SR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             369 => 
             array (
@@ -3717,7 +3637,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_047.png',
                 'card_class' => 'ウィッチ',
                 'card_rea' => 'BR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             370 => 
             array (
@@ -3727,7 +3647,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_053.png',
                 'card_class' => 'ドラゴン',
                 'card_rea' => 'LG',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             371 => 
             array (
@@ -3737,7 +3657,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_056.png',
                 'card_class' => 'ドラゴン',
                 'card_rea' => 'GR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             372 => 
             array (
@@ -3747,7 +3667,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_060.png',
                 'card_class' => 'ドラゴン',
                 'card_rea' => 'SR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             373 => 
             array (
@@ -3757,7 +3677,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_066.png',
                 'card_class' => 'ドラゴン',
                 'card_rea' => 'BR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             374 => 
             array (
@@ -3767,7 +3687,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_072.png',
                 'card_class' => 'ナイトメア',
                 'card_rea' => 'LG',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             375 => 
             array (
@@ -3777,7 +3697,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_075.png',
                 'card_class' => 'ナイトメア',
                 'card_rea' => 'GR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             376 => 
             array (
@@ -3787,7 +3707,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_079.png',
                 'card_class' => 'ナイトメア',
                 'card_rea' => 'SR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             377 => 
             array (
@@ -3797,7 +3717,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_086.png',
                 'card_class' => 'ナイトメア',
                 'card_rea' => 'BR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             378 => 
             array (
@@ -3807,7 +3727,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_090.png',
                 'card_class' => 'ビショップ',
                 'card_rea' => 'LG',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             379 => 
             array (
@@ -3817,7 +3737,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_093.png',
                 'card_class' => 'ビショップ',
                 'card_rea' => 'GR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             380 => 
             array (
@@ -3827,7 +3747,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_097.png',
                 'card_class' => 'ビショップ',
                 'card_rea' => 'SR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             381 => 
             array (
@@ -3837,7 +3757,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_103.png',
                 'card_class' => 'ビショップ',
                 'card_rea' => 'BR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             382 => 
             array (
@@ -3847,7 +3767,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_108.png',
                 'card_class' => 'ニュートラル',
                 'card_rea' => 'LG',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             383 => 
             array (
@@ -3857,7 +3777,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_111.png',
                 'card_class' => 'ニュートラル',
                 'card_rea' => 'GR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             384 => 
             array (
@@ -3867,7 +3787,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_114.png',
                 'card_class' => 'ニュートラル',
                 'card_rea' => 'SR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             385 => 
             array (
@@ -3877,7 +3797,7 @@ class CardTableSeeder extends Seeder
                 'card_img_url' => 'https://shadowverse-evolve.com/wordpress/wp-content/images/cardlist/BP02/bp02_119.png',
                 'card_class' => 'ニュートラル',
                 'card_rea' => 'BR',
-                'card_type' => 'フォロワー',
+                'card_type' => 'フォロワー・エボルヴ',
             ),
             386 => 
             array (
