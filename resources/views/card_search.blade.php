@@ -19,7 +19,7 @@
 
       <div class="tab-content">
         <div id="photo1" class="tab-pane active" role="tabpanel" aria-labelledby="tab1">
-          <div class="justify-content-center card-body row">
+          <div class="card-body row normal-pc">
           <?php $i=0; ?>
             <div style="display:inline-flex" >
               @foreach($hairetu_card as $card)
@@ -131,14 +131,16 @@
           <?php $i=0; ?>
           <div style="display:inline-flex" >
             @foreach($class_cards as $card)
+            <div class='CardTrigger' style="width: 6vw";>
               <form action="{{ route('post') }}" method='post'>
                 @csrf
                 <input type='hidden' name='cardtype' value='{{$card->card_type}}'>
                 <input type='hidden' name='cardid' value='{{$card->id}}'>
-                <input type="image" src='{{$card->card_img_url}}' class='p-1' style="width: 6vw";>
+                <image src='{{$card->card_img_url}}' class='p-1' style="width: 6vw";>
                 <input type='hidden' name='deckid' value='{{$deck_id}}'>
                 <input type="hidden" name="deckclass" value="{{ $deck_class }}">
               </form>
+            </div>
               <?php $i++; ?>
               @if( $i == 10)
                 </div><div style="display:inline-flex" >
