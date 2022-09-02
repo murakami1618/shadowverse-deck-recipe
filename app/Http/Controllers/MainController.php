@@ -470,92 +470,68 @@ class MainController extends Controller
 
     public function post(Request $request)
     {
-        
-        $a='cardid1';
+        $all_card = 0;
+        for($i=0;$i<=49;$i++)
+        {
+            $cardid = "cardid".$i;
+            if(!empty($request->$cardid))
+            {
+                $all_card++;
+            };
+        }
+        for($i=0;$i<$all_card;$i++)
+        {
+            $cardid = "cardid".$i;
+            $cardcount = "cardcount".$i;
+            $deck_card = new Deck_card();
+            $deck_card->deck_id = $request->deckid;
+            $deck_card->card_id = $request->$cardid;
+            $deck_card->card_count = $request->$cardcount;
+            $deck_card->save();
+        }
+    
+        $all_card = 0;
+        for($i=0;$i<=9;$i++)
+        {
+            $excardid = "excardid".$i;
+            if(!empty($request->$excardid))
+            {
+                $all_card++;
+            };
+        }
+        for($i=0;$i<$all_card;$i++)
+        {
+            $excardid = "excardid".$i;
+            $excardcount = "excardcount".$i;
+            $exdeck_card = new Extra_deck();
+            $exdeck_card->deck_id = $request->deckid;
+            $exdeck_card->card_id = $request->$excardid;
+            $exdeck_card->card_count = $request->$excardcount;
+            $exdeck_card->save();
+        }
 
-            for($i=0;$i<=5;$i++){
-                $a='cardtype'.$i;
-                $b='cardcount'.$i;
-                echo($request->$a.":");
-                echo($request->$b."<br>");
-            }
-            echo('カードの種類'.$request->deckcardcount."<br>");
-
-            for($i=0;$i<=5;$i++){
-                $a='excardtype'.$i;
-                $b='excardcount'.$i;
-                echo($request->$a.":");
-                echo($request->$b."<br>");
-            }
-            echo('カードの種類'.$request->exdeckcardcount."<br>");
-
-            for($i=0;$i<=5;$i++){
-                $a='tcardtype'.$i;
-                $b='tcardcount'.$i;
-                echo($request->$a.":");
-                echo($request->$b."<br>");
-            }
-            echo('カードの種類'.$request->tdeckcardcount."<br>");
-
-            var_dump($request->all());
-
-
-        
-        // if($request->cardtype === "フォロワー・エボルヴ")
-        // {
-        //     $card_counts = Extra_deck::where([['deck_id', '=', $request->deckid],['card_id', '=', $request->cardid]])->count();
-        //     $cards_counts = Extra_deck::where('deck_id', '=', $request->deckid)->count();
-
-        //     if($cards_counts <= 9 && $card_counts <= 2){
-        //         $Extra_deck = new Extra_deck();
-        //         $Extra_deck->deck_id = $request->deckid;
-        //         $Extra_deck->card_id = $request->cardid;
-        //         $Extra_deck->save();
-        //         return redirect(route('card/search', [
-        //             $request,
-        //         ]));
-        //     }elseif($card_counts >= 3){
-        //         return redirect(route('card/search/error/card', [
-        //             $request,
-        //         ]));
-        //     }elseif($cards_counts >= 10){
-        //         return redirect(route('card/search/error/exdeck', [
-        //             $request,
-        //         ]));
-        //     }
-        // }
-
-        // if(preg_match('/トークン/',$request->cardtype)){
-        //     $Token = new Token();
-        //     $Token->deck_id = $request->deckid;
-        //     $Token->card_id = $request->cardid;
-        //     $Token->save();
-        //     return redirect(route('card/search', [
-        //         $request,
-        //     ]));
-        // }
-
-        // $card_counts = Deck_card::where([['deck_id', '=', $request->deckid],['card_id', '=', $request->cardid]])->count();
-        // $cards_counts = Deck_card::where('deck_id', '=', $request->deckid)->count();
-        // if($cards_counts <= 49 && $card_counts <= 2)
-        // {
-        //     $deck_card = new Deck_card();
-        //     $deck_card->deck_id = $request->deckid;
-        //     $deck_card->card_id = $request->cardid;
-        //     $deck_card->save();
-            
-        //     return redirect(route('card/search', [
-        //         $request,
-        //     ]));
-        // }elseif($card_counts >= 3){
-        //     return redirect(route('card/search/error/card', [
-        //         $request,
-        //     ]));
-        // }elseif($cards_counts >= 50){
-        //     return redirect(route('card/search/error/deck', [
-        //         $request,
-        //     ]));
-        // }
+        $all_card = 0;
+        for($i=0;$i<=9;$i++)
+        {
+            $tcardid = "tcardid".$i;
+            if(!empty($request->$tcardid))
+            {
+                $all_card++;
+            };
+        }
+        for($i=0;$i<$all_card;$i++)
+        {
+            $tcardid = "tcardid".$i;
+            $tcardcount = "tcardcount".$i;
+            $tdeck_card = new Token();
+            $tdeck_card->deck_id = $request->deckid;
+            $tdeck_card->card_id = $request->$tcardid;
+            $tdeck_card->card_count = $request->$tcardcount;
+            $tdeck_card->save();
+        }
+        return redirect(route('card/search', [
+                    $request,
+                ]));
     }
 
     public function card_delete(Request $request)
