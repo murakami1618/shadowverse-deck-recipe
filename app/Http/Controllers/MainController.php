@@ -57,15 +57,8 @@ class MainController extends Controller
             {
 
             }
-            if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
-                if(in_array($card->card_name, array_column($hairetu_card, 'card_name'))) {
-                    $card['count'] = $card_counts;
-                }else{
-                $card_counts = Deck_card::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-                $card['count'] = $card_counts;
+                $card['count'] = $card_list->card_count;
                 array_push($hairetu_card,$card);
-                }
-            }
         }
 
         $card_lists = Extra_deck::where('deck_id', '=', $request->deckid)->get();
@@ -77,13 +70,9 @@ class MainController extends Controller
             {
 
             }
-            if(in_array($card->card_name, array_column($ex_cards, 'card_name'))) {
-                $card['count'] = $card_counts;
-            }else{
-            $card_counts = Extra_deck::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-            $card['count'] = $card_counts;
+            $card['count'] = $card_list->card_count;
             array_push($ex_cards,$card);
-            }
+            
         }
 
         $card_lists = Token::where('deck_id', '=', $request->deckid)->get();
@@ -95,15 +84,10 @@ class MainController extends Controller
             {
 
             }
-            if(in_array($card->card_name, array_column($tokens, 'card_name'))) {
-                $card['count'] = $card_counts;
-            }else{
-            $card_counts = Token::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-            $card['count'] = $card_counts;
+          
+            $card['count'] = $card_list->card_count;
             array_push($tokens,$card);
-            }
         }
-
         array_multisort(array_column($hairetu_card, 'cost'), SORT_ASC, $hairetu_card);
 
         $class_cards = Card::where('card_name','like',"%$request->search_card%")
@@ -113,7 +97,7 @@ class MainController extends Controller
             ->orWhere('card_type','=','アミュレット')
             ->orWhere('card_type','=','スペル');
         })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
+        ->orderByRaw('cast(cost as signed) asc')->paginate(150);
 
         $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])
         ->where(function($query){
@@ -121,346 +105,29 @@ class MainController extends Controller
             ->orWhere('card_type','=','アミュレット')
             ->orWhere('card_type','=','スペル');
         })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
+        ->orderByRaw('cast(cost as signed) asc')->paginate(150);
 
         $class_excards = Card::where('card_name','like',"%$request->search_card%")
         ->where('card_class','=',$request->deckclass)
         ->where(function($query){
             $query->where('card_type','=','フォロワー・エボルヴ');
         })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
+        ->orderByRaw('cast(cost as signed) asc')->paginate(150);
 
         $neutral_excards = Card::where('card_name','like',"%$request->search_card%")
         ->where('card_class','=','ニュートラル')
         ->where(function($query){
             $query->where('card_type','=','フォロワー・エボルヴ');
         })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
+        ->orderByRaw('cast(cost as signed) asc')->paginate(150);
 
         $class_tokens = Card::where('card_name','like',"%$request->search_card%")
         ->where('card_type','like',"%トークン%")
         ->where('card_class','=',$request->deckclass)
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
+        ->orderByRaw('cast(cost as signed) asc')->paginate(150);
 
         return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error','class_excards','neutral_excards','class_tokens','tokens'));
     }
-
-    public function card_search_error_card(Request $request)
-    {
-        $error = "同じカードは3枚以下にしてください。";
-        $deck_id=$request->deckid;
-        $deck_class=$request->deckclass;
-        $hairetu_card = array();
-        $ex_cards = array();
-        $tokens = array();
-        $card_lists = Deck_card::where('deck_id', '=', $request->deckid)->get();
-        foreach($card_lists as $card_list)
-        {
-            $card_id = $card_list->card_id;
-            $cards = Card::where('id', '=', $card_id)->get();
-            foreach($cards as $card)
-            {
-
-            }
-            if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
-                if(in_array($card->card_name, array_column($hairetu_card, 'card_name'))) {
-                    $card['count'] = $card_counts;
-                }else{
-                $card_counts = Deck_card::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-                $card['count'] = $card_counts;
-                array_push($hairetu_card,$card);
-                }
-            }
-        }
-
-        $card_lists = Extra_deck::where('deck_id', '=', $request->deckid)->get();
-        foreach($card_lists as $card_list)
-        {
-            $card_id = $card_list->card_id;
-            $cards = Card::where('id', '=', $card_id)->get();
-            foreach($cards as $card)
-            {
-
-            }
-            if(in_array($card->card_name, array_column($ex_cards, 'card_name'))) {
-                $card['count'] = $card_counts;
-            }else{
-            $card_counts = Extra_deck::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-            $card['count'] = $card_counts;
-            array_push($ex_cards,$card);
-            }
-        }
-
-        $card_lists = Token::where('deck_id', '=', $request->deckid)->get();
-        foreach($card_lists as $card_list)
-        {
-            $card_id = $card_list->card_id;
-            $cards = Card::where('id', '=', $card_id)->get();
-            foreach($cards as $card)
-            {
-
-            }
-            if(in_array($card->card_name, array_column($tokens, 'card_name'))) {
-                $card['count'] = $card_counts;
-            }else{
-            $card_counts = Token::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-            $card['count'] = $card_counts;
-            array_push($tokens,$card);
-            }
-        }
-
-        array_multisort(array_column($hairetu_card, 'cost'), SORT_ASC, $hairetu_card);
-
-        $class_cards = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_class','=',$request->deckclass)
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー')
-            ->orWhere('card_type','=','アミュレット')
-            ->orWhere('card_type','=','スペル');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー')
-            ->orWhere('card_type','=','アミュレット')
-            ->orWhere('card_type','=','スペル');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $class_excards = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_class','=',$request->deckclass)
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー・エボルヴ');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $neutral_excards = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_class','=','ニュートラル')
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー・エボルヴ');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $class_tokens = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_type','like',"%トークン%")
-        ->where('card_class','=',$request->deckclass)
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error','class_excards','neutral_excards','class_tokens','tokens'));
-    }
-
-    public function card_search_error_deck(Request $request)
-    {
-        $error = "デッキは50枚以下にしてください。";
-        $deck_id=$request->deckid;
-        $deck_class=$request->deckclass;
-        $hairetu_card = array();
-        $ex_cards = array();
-        $tokens = array();
-        $card_lists = Deck_card::where('deck_id', '=', $request->deckid)->get();
-        foreach($card_lists as $card_list)
-        {
-            $card_id = $card_list->card_id;
-            $cards = Card::where('id', '=', $card_id)->get();
-            foreach($cards as $card)
-            {
-
-            }
-            if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
-                if(in_array($card->card_name, array_column($hairetu_card, 'card_name'))) {
-                    $card['count'] = $card_counts;
-                }else{
-                $card_counts = Deck_card::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-                $card['count'] = $card_counts;
-                array_push($hairetu_card,$card);
-                }
-            }
-        }
-
-        $card_lists = Extra_deck::where('deck_id', '=', $request->deckid)->get();
-        foreach($card_lists as $card_list)
-        {
-            $card_id = $card_list->card_id;
-            $cards = Card::where('id', '=', $card_id)->get();
-            foreach($cards as $card)
-            {
-
-            }
-            if(in_array($card->card_name, array_column($ex_cards, 'card_name'))) {
-                $card['count'] = $card_counts;
-            }else{
-            $card_counts = Extra_deck::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-            $card['count'] = $card_counts;
-            array_push($ex_cards,$card);
-            }
-        }
-
-        $card_lists = Token::where('deck_id', '=', $request->deckid)->get();
-        foreach($card_lists as $card_list)
-        {
-            $card_id = $card_list->card_id;
-            $cards = Card::where('id', '=', $card_id)->get();
-            foreach($cards as $card)
-            {
-
-            }
-            if(in_array($card->card_name, array_column($tokens, 'card_name'))) {
-                $card['count'] = $card_counts;
-            }else{
-            $card_counts = Token::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-            $card['count'] = $card_counts;
-            array_push($tokens,$card);
-            }
-        }
-
-        array_multisort(array_column($hairetu_card, 'cost'), SORT_ASC, $hairetu_card);
-
-        $class_cards = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_class','=',$request->deckclass)
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー')
-            ->orWhere('card_type','=','アミュレット')
-            ->orWhere('card_type','=','スペル');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー')
-            ->orWhere('card_type','=','アミュレット')
-            ->orWhere('card_type','=','スペル');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $class_excards = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_class','=',$request->deckclass)
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー・エボルヴ');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $neutral_excards = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_class','=','ニュートラル')
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー・エボルヴ');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $class_tokens = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_type','like',"%トークン%")
-        ->where('card_class','=',$request->deckclass)
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error','class_excards','neutral_excards','class_tokens','tokens'));
-    }
-
-    public function card_search_error_exdeck(Request $request)
-    {
-        $error = "エクストラデッキは10枚以下にしてください。";
-        $deck_id=$request->deckid;
-        $deck_class=$request->deckclass;
-        $hairetu_card = array();
-        $ex_cards = array();
-        $tokens = array();
-        $card_lists = Deck_card::where('deck_id', '=', $request->deckid)->get();
-        foreach($card_lists as $card_list)
-        {
-            $card_id = $card_list->card_id;
-            $cards = Card::where('id', '=', $card_id)->get();
-            foreach($cards as $card)
-            {
-
-            }
-            if($card->card_type == "フォロワー" || $card->card_type == "アミュレット" || $card->card_type == "スペル"){
-                if(in_array($card->card_name, array_column($hairetu_card, 'card_name'))) {
-                    $card['count'] = $card_counts;
-                }else{
-                $card_counts = Deck_card::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-                $card['count'] = $card_counts;
-                array_push($hairetu_card,$card);
-                }
-            }
-        }
-
-        $card_lists = Extra_deck::where('deck_id', '=', $request->deckid)->get();
-        foreach($card_lists as $card_list)
-        {
-            $card_id = $card_list->card_id;
-            $cards = Card::where('id', '=', $card_id)->get();
-            foreach($cards as $card)
-            {
-
-            }
-            if(in_array($card->card_name, array_column($ex_cards, 'card_name'))) {
-                $card['count'] = $card_counts;
-            }else{
-            $card_counts = Extra_deck::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-            $card['count'] = $card_counts;
-            array_push($ex_cards,$card);
-            }
-        }
-
-        $card_lists = Token::where('deck_id', '=', $request->deckid)->get();
-        foreach($card_lists as $card_list)
-        {
-            $card_id = $card_list->card_id;
-            $cards = Card::where('id', '=', $card_id)->get();
-            foreach($cards as $card)
-            {
-
-            }
-            if(in_array($card->card_name, array_column($tokens, 'card_name'))) {
-                $card['count'] = $card_counts;
-            }else{
-            $card_counts = Token::where([['deck_id', '=', $deck_id],['card_id', '=', $card->id]])->count();
-            $card['count'] = $card_counts;
-            array_push($tokens,$card);
-            }
-        }
-
-        array_multisort(array_column($hairetu_card, 'cost'), SORT_ASC, $hairetu_card);
-
-        $class_cards = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_class','=',$request->deckclass)
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー')
-            ->orWhere('card_type','=','アミュレット')
-            ->orWhere('card_type','=','スペル');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー')
-            ->orWhere('card_type','=','アミュレット')
-            ->orWhere('card_type','=','スペル');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $class_excards = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_class','=',$request->deckclass)
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー・エボルヴ');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $neutral_excards = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_class','=','ニュートラル')
-        ->where(function($query){
-            $query->where('card_type','=','フォロワー・エボルヴ');
-        })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        $class_tokens = Card::where('card_name','like',"%$request->search_card%")
-        ->where('card_type','like',"%トークン%")
-        ->where('card_class','=',$request->deckclass)
-        ->orderByRaw('cast(cost as signed) asc')->paginate(16);
-
-        return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error','class_excards','neutral_excards','class_tokens','tokens'));
-    }
-
-
 
     public function search_post()
     {
@@ -470,92 +137,72 @@ class MainController extends Controller
 
     public function post(Request $request)
     {
+        Deck_card::where('deck_id', $request->deckid)->delete();
+        Extra_deck::where('deck_id', $request->deckid)->delete();
+        Token::where('deck_id', $request->deckid)->delete();
         
-        $a='cardid1';
+        $all_card = 0;
+        for($i=0;$i<=49;$i++)
+        {
+            $cardid = "cardid".$i;
+            if(!empty($request->$cardid))
+            {
+                $all_card++;
+            };
+        }
+        for($i=0;$i<$all_card;$i++)
+        {
+            $cardid = "cardid".$i;
+            $cardcount = "cardcount".$i;
+            $deck_card = new Deck_card();
+            $deck_card->deck_id = $request->deckid;
+            $deck_card->card_id = $request->$cardid;
+            $deck_card->card_count = $request->$cardcount;
+            $deck_card->save();
+        }
+    
+        $all_card = 0;
+        for($i=0;$i<=9;$i++)
+        {
+            $excardid = "excardid".$i;
+            if(!empty($request->$excardid))
+            {
+                $all_card++;
+            };
+        }
+        for($i=0;$i<$all_card;$i++)
+        {
+            $excardid = "excardid".$i;
+            $excardcount = "excardcount".$i;
+            $exdeck_card = new Extra_deck();
+            $exdeck_card->deck_id = $request->deckid;
+            $exdeck_card->card_id = $request->$excardid;
+            $exdeck_card->card_count = $request->$excardcount;
+            $exdeck_card->save();
+        }
 
-            for($i=0;$i<=5;$i++){
-                $a='cardtype'.$i;
-                $b='cardcount'.$i;
-                echo($request->$a.":");
-                echo($request->$b."<br>");
-            }
-            echo('カードの種類'.$request->deckcardcount."<br>");
-
-            for($i=0;$i<=5;$i++){
-                $a='excardtype'.$i;
-                $b='excardcount'.$i;
-                echo($request->$a.":");
-                echo($request->$b."<br>");
-            }
-            echo('カードの種類'.$request->exdeckcardcount."<br>");
-
-            for($i=0;$i<=5;$i++){
-                $a='tcardtype'.$i;
-                $b='tcardcount'.$i;
-                echo($request->$a.":");
-                echo($request->$b."<br>");
-            }
-            echo('カードの種類'.$request->tdeckcardcount."<br>");
-
-            var_dump($request->all());
-
-
-        
-        // if($request->cardtype === "フォロワー・エボルヴ")
-        // {
-        //     $card_counts = Extra_deck::where([['deck_id', '=', $request->deckid],['card_id', '=', $request->cardid]])->count();
-        //     $cards_counts = Extra_deck::where('deck_id', '=', $request->deckid)->count();
-
-        //     if($cards_counts <= 9 && $card_counts <= 2){
-        //         $Extra_deck = new Extra_deck();
-        //         $Extra_deck->deck_id = $request->deckid;
-        //         $Extra_deck->card_id = $request->cardid;
-        //         $Extra_deck->save();
-        //         return redirect(route('card/search', [
-        //             $request,
-        //         ]));
-        //     }elseif($card_counts >= 3){
-        //         return redirect(route('card/search/error/card', [
-        //             $request,
-        //         ]));
-        //     }elseif($cards_counts >= 10){
-        //         return redirect(route('card/search/error/exdeck', [
-        //             $request,
-        //         ]));
-        //     }
-        // }
-
-        // if(preg_match('/トークン/',$request->cardtype)){
-        //     $Token = new Token();
-        //     $Token->deck_id = $request->deckid;
-        //     $Token->card_id = $request->cardid;
-        //     $Token->save();
-        //     return redirect(route('card/search', [
-        //         $request,
-        //     ]));
-        // }
-
-        // $card_counts = Deck_card::where([['deck_id', '=', $request->deckid],['card_id', '=', $request->cardid]])->count();
-        // $cards_counts = Deck_card::where('deck_id', '=', $request->deckid)->count();
-        // if($cards_counts <= 49 && $card_counts <= 2)
-        // {
-        //     $deck_card = new Deck_card();
-        //     $deck_card->deck_id = $request->deckid;
-        //     $deck_card->card_id = $request->cardid;
-        //     $deck_card->save();
-            
-        //     return redirect(route('card/search', [
-        //         $request,
-        //     ]));
-        // }elseif($card_counts >= 3){
-        //     return redirect(route('card/search/error/card', [
-        //         $request,
-        //     ]));
-        // }elseif($cards_counts >= 50){
-        //     return redirect(route('card/search/error/deck', [
-        //         $request,
-        //     ]));
-        // }
+        $all_card = 0;
+        for($i=0;$i<=9;$i++)
+        {
+            $tcardid = "tcardid".$i;
+            if(!empty($request->$tcardid))
+            {
+                $all_card++;
+            };
+        }
+        for($i=0;$i<$all_card;$i++)
+        {
+            $tcardid = "tcardid".$i;
+            $tcardcount = "tcardcount".$i;
+            $tdeck_card = new Token();
+            $tdeck_card->deck_id = $request->deckid;
+            $tdeck_card->card_id = $request->$tcardid;
+            $tdeck_card->card_count = $request->$tcardcount;
+            $tdeck_card->save();
+        }
+        return redirect(route('card/search', [
+                    $request,
+                ]));
     }
 
     public function card_delete(Request $request)

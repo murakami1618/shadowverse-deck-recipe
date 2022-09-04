@@ -74,6 +74,7 @@
                     <a name='tcardcount' class="tcardcount">{{ $card->count }}</a>
                   </div>
                 </div>
+                <?php $i++?>
               @endforeach
               <input type='hidden' class="tdeckcardcount" name='tdeckcardcount' value=''>
             </div>
