@@ -25,7 +25,7 @@
                 <?php $i=0; ?>
                 @csrf
                 @foreach($hairetu_card as $card)
-                  <div style="width: 8vw";>
+                  <div style="width: 8vw"; class="DelNormalCardTrigger">
                     <div class='card border-0 deckcard'>
                       <input type='hidden' class="cardtype" name='cardtype<?php echo($i); ?>' value='{{$card->card_type}}'>
                       <input type='hidden' class="cardid" name='cardid<?php echo($i); ?>' value='{{$card->id}}'>
@@ -45,7 +45,7 @@
             <div class=" card-body row ex-pc">
               <?php $i=0; ?>
               @foreach($ex_cards as $card)
-                <div style="width: 8vw";>
+                <div style="width: 8vw"; class="DelExCardTrigger">
                   <div class='card border-0'>
                     <input type='hidden' name='excardtype<?php echo($i); ?>' class='excardtype' value='{{$card->card_type}}'>
                     <input type='hidden' name='excardid<?php echo($i); ?>' class='excardid' value='{{$card->id}}'>
@@ -64,8 +64,7 @@
             <div class=" card-body row token-pc">
               <?php $i=0; ?>
               @foreach($tokens as $card)
-                <div style="width: 8vw";>
-                  @csrf
+                <div style="width: 8vw"; class="DelTokenCardTrigger">
                   <div class='card border-0'>
                     <input type='hidden' name='tcardtype<?php echo($i); ?>' class='tcardtype' value='{{$card->card_type}}'>
                     <input type='hidden' name='tcardid<?php echo($i); ?>' class='tcardid' value='{{$card->id}}'>
@@ -131,9 +130,6 @@
                 
               </div>
               @endforeach
-          <div class="d-flex justify-content-center">
-              {{ $class_cards->appends(request()->input())->links()}}
-          </div>
         </div>
       </div>
 
@@ -157,9 +153,6 @@
                       <a name='cardcount' class="cardcount"></a>
                 </div>
                 @endforeach
-            <div class="d-flex justify-content-center">
-                {{ $neutral_cards->appends(request()->input())->links()}}
-            </div>
         </div>
       </div>
 
@@ -183,9 +176,6 @@
                       <a name='excardcount' class='excardcount' ></a>
                 </div>
                 @endforeach
-            <div class="d-flex justify-content-center">
-                {{ $class_excards->appends(request()->input())->links()}}
-            </div>
         </div>
       </div>
 
@@ -209,9 +199,6 @@
                       <a name='excardcount' class="excardcount"></a>
                 </div>
                 @endforeach
-            <div class="d-flex justify-content-center">
-                {{ $neutral_excards->appends(request()->input())->links()}}
-            </div>
         </div>
       </div>
 
@@ -237,9 +224,6 @@
                   </div>
                 </div>
                 @endforeach
-            <div class="d-flex justify-content-center">
-                {{ $class_tokens->appends(request()->input())->links()}}
-            </div>
         </div>
       </div>
 
@@ -393,9 +377,6 @@
               @endif
             @endforeach
           </div>
-          <div class="d-flex justify-content-center">
-              {{ $class_cards->appends(request()->input())->links()}}
-          </div>
         </div>
       </div>
 
@@ -426,9 +407,6 @@
                   @endif
                 @endforeach
             </div>
-            <div class="d-flex justify-content-center">
-              {{ $neutral_cards->appends(request()->input())->links()}}
-          </div>
         </div>
       </div>
 
@@ -459,9 +437,6 @@
                   @endif
                 @endforeach
             </div>
-            <div class="d-flex justify-content-center">
-              {{ $neutral_cards->appends(request()->input())->links()}}
-          </div>
         </div>
       </div>
 
@@ -492,9 +467,6 @@
                   @endif
                 @endforeach
             </div>
-            <div class="d-flex justify-content-center">
-              {{ $neutral_cards->appends(request()->input())->links()}}
-          </div>
         </div>
       </div>
 
@@ -525,9 +497,6 @@
                   @endif
                 @endforeach
             </div>
-            <div class="d-flex justify-content-center">
-              {{ $neutral_cards->appends(request()->input())->links()}}
-          </div>
         </div>
       </div>
 

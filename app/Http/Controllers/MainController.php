@@ -97,7 +97,7 @@ class MainController extends Controller
             ->orWhere('card_type','=','アミュレット')
             ->orWhere('card_type','=','スペル');
         })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(150);
+        ->orderByRaw('cast(cost as signed) asc')->get();
 
         $neutral_cards = Card::where([['card_name','like',"%$request->search_card%"],['card_class','=','ニュートラル']])
         ->where(function($query){
@@ -105,26 +105,26 @@ class MainController extends Controller
             ->orWhere('card_type','=','アミュレット')
             ->orWhere('card_type','=','スペル');
         })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(150);
+        ->orderByRaw('cast(cost as signed) asc')->get();
 
         $class_excards = Card::where('card_name','like',"%$request->search_card%")
         ->where('card_class','=',$request->deckclass)
         ->where(function($query){
             $query->where('card_type','=','フォロワー・エボルヴ');
         })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(150);
+        ->orderByRaw('cast(cost as signed) asc')->get();
 
         $neutral_excards = Card::where('card_name','like',"%$request->search_card%")
         ->where('card_class','=','ニュートラル')
         ->where(function($query){
             $query->where('card_type','=','フォロワー・エボルヴ');
         })
-        ->orderByRaw('cast(cost as signed) asc')->paginate(150);
+        ->orderByRaw('cast(cost as signed) asc')->get();
 
         $class_tokens = Card::where('card_name','like',"%$request->search_card%")
         ->where('card_type','like',"%トークン%")
         ->where('card_class','=',$request->deckclass)
-        ->orderByRaw('cast(cost as signed) asc')->paginate(150);
+        ->orderByRaw('cast(cost as signed) asc')->get();
 
         return view('card_search', compact('class_cards','neutral_cards','hairetu_card','ex_cards','deck_id','deck_class','error','class_excards','neutral_excards','class_tokens','tokens'));
     }
