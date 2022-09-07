@@ -1,4 +1,4 @@
-$('.NormalCardTrigger').on('click', function() {//カードが押されたとき
+$(document).on('click', '.NormalCardTrigger', function() {//カードが押されたとき
     const deckarray = [];//構築されているデッキの要素取得
     var allcardcount=0;
     const decklength = $('.normal-pc').children().find('input[class="cardid"]').length;//構築されているデッキの要素数(カードの種類の数)を取得
@@ -16,7 +16,7 @@ $('.NormalCardTrigger').on('click', function() {//カードが押されたとき
         var Trigger = ($(this).find('input[class="cardid"]').val()); //押されたカードのidを取得
         console.log(deckarray.indexOf(Trigger));
         if(deckarray.indexOf(Trigger) == -1){//deckarray.indexOf(Trigger)でTriggerに一致する（すでに構築されているカード）があれば何番目に構築されているか返すなければ-1が返ってくるので追加する
-            $(this).clone(true, false).appendTo('.normal-pc');
+            $(this).clone(true).attr('class', 'DelNormalCardTrigger').appendTo('.normal-pc');
             $('.normal-pc').children().find('input[class="cardtype"]').eq(deckarray.indexOf(Trigger)).attr('name', 'cardtype'+decklength);
             $('.normal-pc').children().find('input[class="cardid"]').eq(deckarray.indexOf(Trigger)).attr('name', 'cardid'+decklength);
             $('.normal-pc').children().find('input[class="cardcount"]').eq(deckarray.indexOf(Trigger)).attr('name', 'cardcount'+decklength);
@@ -45,7 +45,7 @@ $('.NormalCardTrigger').on('click', function() {//カードが押されたとき
     console.log(allcardcount);
 })
 
-$('.ExCardTrigger').on('click', function() {//カードが押されたとき
+$(document).on('click', '.ExCardTrigger',function() {//カードが押されたとき
     const deckarray = [];//構築されているデッキの要素取得
     var allexcardcount=0;
     const decklength = $('.ex-pc').children().find('input[class="excardid"]').length;//構築されているデッキの要素数(カードの種類の数)を取得
@@ -64,7 +64,7 @@ $('.ExCardTrigger').on('click', function() {//カードが押されたとき
         var Trigger = ($(this).find('input[class="excardid"]').val()); //押されたカードのidを取得
         console.log(deckarray.indexOf(Trigger));
         if(deckarray.indexOf(Trigger) == -1){//deckarray.indexOf(Trigger)でTriggerに一致する（すでに構築されているカード）があれば何番目に構築されているか返すなければ-1が返ってくるので追加する
-            $(this).clone(true, false).appendTo('.ex-pc');
+            $(this).clone(true).attr('class', 'DelExCardTrigger').appendTo('.ex-pc');
             $('.ex-pc').children().find('input[class="excardtype"]').eq(deckarray.indexOf(Trigger)).attr('name', 'excardtype'+decklength);
             $('.ex-pc').children().find('input[class="excardid"]').eq(deckarray.indexOf(Trigger)).attr('name', 'excardid'+decklength);
             $('.ex-pc').children().find('input[class="excardcount"]').eq(deckarray.indexOf(Trigger)).attr('name', 'excardcount'+decklength);
@@ -87,7 +87,7 @@ $('.ExCardTrigger').on('click', function() {//カードが押されたとき
 
 })
 
-$('.TokenCardTrigger').on('click', function() {//カードが押されたとき
+$(document).on('click', '.TokenCardTrigger',function() {//カードが押されたとき
     const deckarray = [];//構築されているデッキの要素取得
     const decklength = $('.token-pc').children().find('input[class="tcardid"]').length;//構築されているデッキの要素数(カードの種類の数)を取得
 
@@ -100,7 +100,7 @@ $('.TokenCardTrigger').on('click', function() {//カードが押されたとき
     var Trigger = ($(this).find('input[class="tcardid"]').val()); //押されたカードのidを取得
     console.log(deckarray.indexOf(Trigger));
     if(deckarray.indexOf(Trigger) == -1){//deckarray.indexOf(Trigger)でTriggerに一致する（すでに構築されているカード）があれば何番目に構築されているか返すなければ-1が返ってくるので追加する
-        $(this).clone(true, false).appendTo('.token-pc');
+        $(this).clone(true).attr('class', 'DelTokenCardTrigger').appendTo('.token-pc');
         $('.token-pc').children().find('input[class="tcardtype"]').eq(deckarray.indexOf(Trigger)).attr('name', 'tcardtype'+decklength);
         $('.token-pc').children().find('input[class="tcardid"]').eq(deckarray.indexOf(Trigger)).attr('name', 'tcardid'+decklength);
         $('.token-pc').children().find('input[class="tcardcount"]').eq(deckarray.indexOf(Trigger)).attr('name', 'tcardcount'+decklength);
@@ -122,3 +122,36 @@ $('.TokenCardTrigger').on('click', function() {//カードが押されたとき
 $('.ex-pc').find('input[class="exdeckcardcount"]').val($('.ex-pc').children().find('input[class="excardid"]').length);
 $('.normal-pc').find('input[class="deckcardcount"]').val($('.normal-pc').children().find('input[class="cardid"]').length);
 $('.token-pc').find('input[class="tdeckcardcount"]').val($('.token-pc').children().find('input[class="tcardid"]').length);
+
+$(document).on('click','.DelNormalCardTrigger', function() {
+    var cardcount = $(this).find('input[class="cardcount"]').val() -1;
+    if(cardcount >0)
+    {
+        $(this).find('input[class="cardcount"]').val(cardcount);
+        $(this).find('a[class="cardcount"]').text(cardcount);
+    }else{
+        $(this).remove();        
+    }
+})
+
+$(document).on('click', '.DelExCardTrigger' ,function() {
+    var cardcount = $(this).find('input[class="excardcount"]').val() -1;
+    if(cardcount >0)
+    {
+        $(this).find('input[class="excardcount"]').val(cardcount);
+        $(this).find('a[class="excardcount"]').text(cardcount);
+    }else{
+        $(this).remove();        
+    }
+})
+
+$(document).on('click', '.DelTokenCardTrigger' ,function() {
+    var cardcount = $(this).find('input[class="tcardcount"]').val() -1;
+    if(cardcount >0)
+    {
+        $(this).find('input[class="tcardcount"]').val(cardcount);
+        $(this).find('a[class="tcardcount"]').text(cardcount);
+    }else{
+        $(this).remove();        
+    }
+})
